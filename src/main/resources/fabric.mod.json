@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "carpet-totos-extras",
+  "version": "${version}",
+
+  "name": "Toto's Carpet Extras",
+  "description": "Adds a few QoL changes to the survival experience",
+  "authors": [
+    "Totorewa"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/carpet-totos-extras/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "carpettotosextras.TotoCarpetMod"
+    ]
+  },
+  "mixins": [
+    "carpet-totos-extras.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "minecraft": "1.16.x",
+    "carpet": "*"
+  },
+  "suggests": {
+  }
+}

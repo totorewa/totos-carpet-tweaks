@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "carpettotosextras.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+  ],
+  "server": [
+    "spectate.ServerPlayerEntityMixin",
+    "spectate.ServerPlayerInteractionManagerMixin",
+    "villagecats.CatSpawnerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
