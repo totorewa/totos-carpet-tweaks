@@ -5,15 +5,30 @@ import carpet.settings.Rule;
 import carpet.settings.Validator;
 import net.minecraft.server.command.ServerCommandSource;
 
+import static carpet.settings.RuleCategory.COMMAND;
 import static carpet.settings.RuleCategory.SURVIVAL;
-import static carpet.settings.RuleCategory.FEATURE;
 
 public class TotoCarpetSettings {
     public static final String TOTO = "totos-extras";
 
-    @Rule(desc = "Remembers players location when changing to spectator. Teleports them back to that location when they change back to survival.", category = {SURVIVAL, TOTO})
-    public static boolean tpSpectatorsBackOnSurvivalChange = false;
+    private static class validateCatSpawnRate extends Validator<Integer> {
+        @Override
+        public Integer validate(ServerCommandSource source, ParsedRule<Integer> currentRule, Integer newValue, String string) {
+            return (newValue >= 0 && newValue <= 100) ? newValue : null;
+        }
 
-    @Rule(desc = "Prevents cats spawning in villages", category = {SURVIVAL, TOTO})
-    public static boolean catsNoSpawnInVillage = false;
+        @Override
+        public String description() {
+            return "You must choose a value from 0 to 100";
+        }
+    }
+
+    @Rule(desc = "Reduces cat spawn chances in villages", category = {SURVIVAL, TOTO}, validate = validateCatSpawnRate.class, options = {"0", "25", "50", "75", "100"}, strict = false)
+    public static int reduceCatSpawnChance = 0;
+
+    @Rule(desc = "Prevent players from teleporting when using spectator mode by returning them to their previous survival position", category = {SURVIVAL, TOTO})
+    public static boolean returnSpectators = false;
+
+    @Rule(desc = "Enables /ts command to toggle spectator mode", category = {COMMAND, TOTO})
+    public static String commandToggleSpectator = "true";
 }

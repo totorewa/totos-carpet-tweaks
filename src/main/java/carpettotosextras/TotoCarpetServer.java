@@ -2,7 +2,7 @@ package carpettotosextras;
 
 import carpet.CarpetExtension;
 import carpet.CarpetServer;
-import carpettotosextras.commands.SpectatorCommand;
+import carpettotosextras.commands.ToggleSpectatorCommand;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.server.command.ServerCommandSource;
 
@@ -20,7 +20,7 @@ public class TotoCarpetServer implements CarpetExtension {
 
 	@Override
 	public void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher) {
-		SpectatorCommand.register(dispatcher);
+		ToggleSpectatorCommand.register(dispatcher);
 	}
 
 	@Override

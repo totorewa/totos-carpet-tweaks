@@ -18,8 +18,7 @@ public abstract class ServerPlayerInteractionManagerMixin {
 
     @Inject(method="setGameMode(Lnet/minecraft/world/GameMode;Lnet/minecraft/world/GameMode;)V", at = @At(value = "HEAD"))
     private void onGameModeChange(GameMode gameMode, GameMode previousGameMode, CallbackInfo ci) {
-        if (TotoCarpetSettings.tpSpectatorsBackOnSurvivalChange && previousGameMode != gameMode) {
-            System.out.println(String.format("Changing from %s to %s", previousGameMode.getName(), gameMode.getName()));
+        if (TotoCarpetSettings.returnSpectators && previousGameMode != gameMode) {
             // If changing from survival mode, remember position
             if (previousGameMode == GameMode.SURVIVAL) {
                 getPlayer().carpettotosextras_rememberSurvivalPosition();

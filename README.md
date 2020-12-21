@@ -5,18 +5,16 @@ This mod came about while playing some SMP and there were a few quality of life 
 
 ## Features 
 
-### catsNoSpawnInVillage
-Prevents cats from spawning in villages.  
+### reduceCatSpawnChance
+When spawning a cat in a village, determine the percentage chance of it succeeding.   
 While hanging around the base, you may often find a pesky cat appear out of nowhere.  
-Eventually I got so annoyed at them spawning, I decided to disable it.  
-Village is explicitly stated because this does not prevent cats from spawning in witch huts or with the world generation.
+I was fed up with them spawning all the time but I also don't want to completely get rid of them, as they may be wanted for anti-phantom purposes and I didn't want to have to go to a witch hut just to get one so instead I opted to reduce the spawning instead. Spawning can still be disabled with a value of 100.
 
-* Type: `boolean`
-* Default value: `false`
-* Required options: `true`, `false`
+* Type: `integer`
+* Default value: `0`
 * Categories: `SURVIVAL`, `TOTO`
 
-### tpSpectatorsBackOnSurvivalChange 
+### returnSpectators 
 Teleports players back to where they were when they changed to spectator.  
 There was a scarpet script which offered this feature however the position did not persist and was forgotten when the server restarted. I decided to implement my own version which saves the survival position against the player.
 
