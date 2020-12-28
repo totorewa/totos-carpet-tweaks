@@ -5,13 +5,13 @@ This mod came about while playing some SMP and there were a few quality of life 
 
 ## Features 
 
-### reduceCatSpawnChance
+### catSpawnChance
 When spawning a cat in a village, determine the percentage chance of it succeeding.   
 While hanging around the base, you may often find a pesky cat appear out of nowhere.  
-I was fed up with them spawning all the time but I also don't want to completely get rid of them, as they may be wanted for anti-phantom purposes and I didn't want to have to go to a witch hut just to get one so instead I opted to reduce the spawning instead. Spawning can still be disabled with a value of 100.
+I was fed up with them spawning all the time but I also don't want to completely get rid of them, as they may be wanted for anti-phantom purposes and I didn't want to have to go to a witch hut just to get one so instead I opted to reduce the spawning instead. Spawning can still be disabled with a value of 0.
 
 * Type: `integer`
-* Default value: `0`
+* Default value: `100`
 * Categories: `SURVIVAL`, `TOTO`
 
 ### returnSpectators 

@@ -17,22 +17,17 @@ public class CatSpawnerMixin {
     @Inject(method = "spawnInHouse", at = @At(value = "HEAD"), cancellable = true)
     private void onSpawnInHouse(ServerWorld world, BlockPos pos, CallbackInfoReturnable<Integer> cir) {
         // Fallback to NMS
-        if (TotoCarpetSettings.reduceCatSpawnChance == 0) return;
-        // If set to 100%, disable spawning all together
-        if (TotoCarpetSettings.reduceCatSpawnChance == 100) {
+        if (TotoCarpetSettings.catSpawnChance == 100) return;
+        if (TotoCarpetSettings.catSpawnChance == 0 || world.random.nextFloat() >= getSpawnChance())
             cir.setReturnValue(0);
-            return;
-        }
-
-        if (world.random.nextFloat() < getSpawnChance()) {
-            cir.setReturnValue(0);
-            return;
-        }
     }
 
+    // Calculates and stores the spawn chance. Although it's cheap to calculate, the setting is unlikely to change
+    // and therefore the output will be the same.
     private static float getSpawnChance() {
-        if (TotoCarpetSettings.reduceCatSpawnChance != lastSpawnChance) {
-            spawnChance = (float)TotoCarpetSettings.reduceCatSpawnChance / 100;
+        if (TotoCarpetSettings.catSpawnChance != lastSpawnChance) {
+            spawnChance = (float)TotoCarpetSettings.catSpawnChance / 100;
+            lastSpawnChance = TotoCarpetSettings.catSpawnChance;
         }
         return spawnChance;
     }

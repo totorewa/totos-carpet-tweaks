@@ -26,8 +26,8 @@ public class TotoCarpetSettings {
         }
     }
 
-    @Rule(desc = "Reduces cat spawn chances in villages", category = {SURVIVAL, TOTO}, validate = validateCatSpawnRate.class, options = {"0", "25", "50", "75", "100"}, strict = false)
-    public static int reduceCatSpawnChance = 0;
+    @Rule(desc = "Sets chance cat will spawn in a village", category = {SURVIVAL, TOTO}, validate = validateCatSpawnRate.class, options = {"0", "25", "50", "75", "100"}, strict = false)
+    public static int catSpawnChance = 100;
 
     @Rule(desc = "Prevent players from teleporting when using spectator mode by returning them to their previous survival position", category = {SURVIVAL, TOTO})
     public static boolean returnSpectators = false;
