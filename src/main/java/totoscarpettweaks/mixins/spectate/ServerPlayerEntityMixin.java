@@ -87,7 +87,7 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity implements Se
         return false;
     }
 
-    @Inject(method = "writeCustomDataToTag", at = @At(value = "HEAD"))
+    @Inject(method = "writeCustomDataToTag", at = @At("HEAD"))
     private void writeSurvivalPosition(CompoundTag tag, CallbackInfo ci) {
         if (canReturnSpectator()) {
             Vec3d pos = survivalPos.get();
@@ -100,7 +100,7 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity implements Se
         }
     }
 
-    @Inject(method = "readCustomDataFromTag", at = @At(value = "HEAD"))
+    @Inject(method = "readCustomDataFromTag", at = @At("HEAD"))
     private void readSurvivalPosition(CompoundTag tag, CallbackInfo ci) {
         if (tag.contains(NBT_SURVIVALX) && tag.contains(NBT_SURVIVALY) && tag.contains(NBT_SURVIVALZ))
             setSurvivalPosition(tag.getDouble(NBT_SURVIVALX), tag.getDouble(NBT_SURVIVALY), tag.getDouble(NBT_SURVIVALZ));

@@ -11,8 +11,8 @@ import static carpet.settings.RuleCategory.SURVIVAL;
 public class TotoCarpetSettings {
     public static final String TOTO = "totos-tweaks";
 
-//    @Rule(desc = "Piglins anger when a player interacts with a chest", category = {SURVIVAL, TOTO})
-//    public static boolean piglinsAngerOnChestUse = true;
+    @Rule(desc = "Piglins anger when a player interacts with a chest", category = {SURVIVAL, TOTO})
+    public static boolean piglinsAngerOnChestUse = true;
 
     private static class validateCatSpawnRate extends Validator<Integer> {
         @Override

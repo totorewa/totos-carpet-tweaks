@@ -1,4 +1,4 @@
-package totoscarpettweaks.mixins.villagerschedule;
+package totoscarpettweaks.mixins.timeofday;
 
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.profiler.Profiler;
@@ -28,6 +28,10 @@ public abstract class ServerWorldMixin extends World {
     ))
     protected void onTimeTick(CallbackInfo ci) {
         if (getRegistryKey() == World.OVERWORLD) {
+            // The villager schedule logger could be invoked directly here, and normally would be,
+            // however this time of day advancement could be a useful hook to have for more than this
+            // feature and so instead I've created a "controller" which will handle passing out this value
+            // to any feature, albeit hard-coded, which may have use of it.
             TimeOfDayAdvanced.handle((int) (getTimeOfDay() % 24000L));
         }
     }

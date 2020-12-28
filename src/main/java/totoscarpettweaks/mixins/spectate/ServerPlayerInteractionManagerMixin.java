@@ -17,7 +17,7 @@ public abstract class ServerPlayerInteractionManagerMixin {
     @Shadow
     public ServerPlayerEntity player;
 
-    @Inject(method="setGameMode(Lnet/minecraft/world/GameMode;Lnet/minecraft/world/GameMode;)V", at = @At(value = "HEAD"))
+    @Inject(method="setGameMode(Lnet/minecraft/world/GameMode;Lnet/minecraft/world/GameMode;)V", at = @At("HEAD"))
     private void onGameModeChange(GameMode gameMode, GameMode previousGameMode, CallbackInfo ci) {
         if (TotoCarpetSettings.returnSpectators && previousGameMode != gameMode && !(player instanceof EntityPlayerMPFake)) {
             // If changing from survival mode, remember position
