@@ -1,11 +1,12 @@
-package carpettotosextras.commands;
+package totoscarpettweaks.commands;
 
+import carpet.patches.EntityPlayerMPFake;
 import carpet.settings.SettingsManager;
 import carpet.utils.Messenger;
-import carpettotosextras.TotoCarpetSettings;
-import carpettotosextras.fakes.ServerPlayerEntityInterface;
+import net.minecraft.util.math.Vec3d;
+import totoscarpettweaks.TotoCarpetSettings;
+import totoscarpettweaks.fakes.ServerPlayerEntityInterface;
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -24,20 +25,15 @@ public class ToggleSpectatorCommand {
     private static final String DIMENSION_FORMAT_TEMPLATE = "w %s";
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
-        // Base command
-        LiteralArgumentBuilder<ServerCommandSource> literalArgumentBuilder =
+        dispatcher.register(
                 literal("ts")
-                        .requires(player -> TotoCarpetSettings.returnSpectators &&
-                                SettingsManager.canUseCommand(player, TotoCarpetSettings.commandToggleSpectator))
-                        .executes(c -> toggleSpectator(c.getSource()));
-
-        // Get last position
-        literalArgumentBuilder.then(
-                literal("info")
-                        .executes(c -> spectatorInfo(c.getSource()))
-        );
-
-        dispatcher.register(literalArgumentBuilder);
+                        .requires(c -> TotoCarpetSettings.returnSpectators &&
+                                SettingsManager.canUseCommand(c, (Object) TotoCarpetSettings.commandToggleSpectator))
+                        .executes(c -> toggleSpectator(c.getSource()))
+                        .then(
+                                literal("info")
+                                        .executes(c -> spectatorInfo(c.getSource()))
+                        ));
     }
 
     private static int toggleSpectator(ServerCommandSource source) throws CommandSyntaxException {
@@ -54,21 +50,27 @@ public class ToggleSpectatorCommand {
             return 0;
         }
 
+        if (player instanceof EntityPlayerMPFake) {
+            Messenger.m(player, "r Command cannot be used on a fake player.");
+            return 0;
+        }
+
         ServerPlayerEntityInterface totoPlayer = (ServerPlayerEntityInterface) player;
 
-        if (!totoPlayer.carpettotosextras_hasLastSurvivalPosition()) {
+        if (!totoPlayer.canReturnSpectator()) {
             Messenger.m(player, "r Sorry, I can't remember your last position.");
             return 0;
         }
 
+        Vec3d pos = totoPlayer.getSurvivalPosition().orElse(Vec3d.ZERO);
         Messenger.m(player,
                 "y X ",
-                String.format(POSITION_FORMAT_TEMPLATE, totoPlayer.carpettotosextra_getSurvivalX()),
+                String.format(POSITION_FORMAT_TEMPLATE, pos.x),
                 "y Y ",
-                String.format(POSITION_FORMAT_TEMPLATE, totoPlayer.carpettotosextra_getSurvivalY()),
+                String.format(POSITION_FORMAT_TEMPLATE, pos.y),
                 "y Z ",
-                String.format(POSITION_FORMAT_TEMPLATE, totoPlayer.carpettotosextra_getSurvivalZ()));
-        Messenger.m(player, "y Dimension ", String.format(DIMENSION_FORMAT_TEMPLATE, totoPlayer.carpettotosextra_getSurvivalDimensionName()));
+                String.format(POSITION_FORMAT_TEMPLATE, pos.z));
+        Messenger.m(player, "y Dimension ", String.format(DIMENSION_FORMAT_TEMPLATE, totoPlayer.getSurvivalDimensionName()));
 
         return 1;
     }

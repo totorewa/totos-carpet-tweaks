@@ -1,6 +1,6 @@
-package carpettotosextras.mixins.villagecats;
+package totoscarpettweaks.mixins.villagecats;
 
-import carpettotosextras.TotoCarpetSettings;
+import totoscarpettweaks.TotoCarpetSettings;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.CatSpawner;
@@ -14,12 +14,12 @@ public class CatSpawnerMixin {
     private static int lastSpawnChance;
     private static float spawnChance;
 
-    @Inject(method = "spawnInHouse", at = @At(value = "HEAD"))
+    @Inject(method = "spawnInHouse", at = @At(value = "HEAD"), cancellable = true)
     private void onSpawnInHouse(ServerWorld world, BlockPos pos, CallbackInfoReturnable<Integer> cir) {
         // Fallback to NMS
-        if (TotoCarpetSettings.catSpawnChance == 0) return;
+        if (TotoCarpetSettings.reduceCatSpawnChance == 0) return;
         // If set to 100%, disable spawning all together
-        if (TotoCarpetSettings.catSpawnChance == 100) {
+        if (TotoCarpetSettings.reduceCatSpawnChance == 100) {
             cir.setReturnValue(0);
             return;
         }
@@ -31,8 +31,8 @@ public class CatSpawnerMixin {
     }
 
     private static float getSpawnChance() {
-        if (TotoCarpetSettings.catSpawnChance != lastSpawnChance) {
-            spawnChance = (float)TotoCarpetSettings.catSpawnChance / 100;
+        if (TotoCarpetSettings.reduceCatSpawnChance != lastSpawnChance) {
+            spawnChance = (float)TotoCarpetSettings.reduceCatSpawnChance / 100;
         }
         return spawnChance;
     }

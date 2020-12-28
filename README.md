@@ -1,4 +1,4 @@
-# Toto's Carpet Extras
+# Toto's Carpet Tweaks
 
 This mod extends the [carpet mod](https://github.com/gnembon/fabric-carpet) and adds a few changes to the survival experience.   
 This mod came about while playing some SMP and there were a few quality of life changes we wanted to make. The mod is starting off with just a spectator mode feature and an anti-cat spawner, but will grow overtime as I get around to it.
@@ -22,4 +22,14 @@ There was a scarpet script which offered this feature however the position did n
 * Default value: `false`
 * Required options: `true`, `false`
 * Categories: `SURVIVAL`, `TOTO`
+
+### piglinsAngerOnChestUse
+Piglins anger on a player who interacts a chest.  
+Ever just minding your own business in the nether when you thoughtlessly place down a shulker box and open it experience the wrath of piglin bystanders? Well not anymore!
+
+* Type: `boolean`
+* Default value: `true`
+* Required options: `true`, `false`
+* Categories: `SURVIVAL`, `TOTO`
+
 

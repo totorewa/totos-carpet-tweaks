@@ -1,14 +1,15 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "carpettotosextras.mixins",
+  "package": "totoscarpettweaks.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
   ],
   "server": [
     "spectate.ServerPlayerEntityMixin",
     "spectate.ServerPlayerInteractionManagerMixin",
-    "villagecats.CatSpawnerMixin"
+    "villagecats.CatSpawnerMixin",
+    "villagerschedule.ServerWorldMixin"
   ],
   "injectors": {
     "defaultRequire": 1

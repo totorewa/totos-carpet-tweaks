@@ -1,4 +1,4 @@
-package carpettotosextras;
+package totoscarpettweaks;
 
 import net.fabricmc.api.ModInitializer;
 

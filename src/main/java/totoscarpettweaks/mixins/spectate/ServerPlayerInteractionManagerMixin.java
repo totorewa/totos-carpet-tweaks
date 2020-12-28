@@ -1,7 +1,8 @@
-package carpettotosextras.mixins.spectate;
+package totoscarpettweaks.mixins.spectate;
 
-import carpettotosextras.TotoCarpetSettings;
-import carpettotosextras.fakes.ServerPlayerEntityInterface;
+import carpet.patches.EntityPlayerMPFake;
+import totoscarpettweaks.TotoCarpetSettings;
+import totoscarpettweaks.fakes.ServerPlayerEntityInterface;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.network.ServerPlayerInteractionManager;
 import net.minecraft.world.GameMode;
@@ -18,13 +19,13 @@ public abstract class ServerPlayerInteractionManagerMixin {
 
     @Inject(method="setGameMode(Lnet/minecraft/world/GameMode;Lnet/minecraft/world/GameMode;)V", at = @At(value = "HEAD"))
     private void onGameModeChange(GameMode gameMode, GameMode previousGameMode, CallbackInfo ci) {
-        if (TotoCarpetSettings.returnSpectators && previousGameMode != gameMode) {
+        if (TotoCarpetSettings.returnSpectators && previousGameMode != gameMode && !(player instanceof EntityPlayerMPFake)) {
             // If changing from survival mode, remember position
             if (previousGameMode == GameMode.SURVIVAL) {
-                getPlayer().carpettotosextras_rememberSurvivalPosition();
+                getPlayer().rememberSurvivalPosition();
             // If changing to survival mode, teleport to previous survival position
             } else if (gameMode == GameMode.SURVIVAL) {
-                getPlayer().carpettotosextras_teleportToSurvivalPosition();
+                getPlayer().tryTeleportToSurvivalPosition();
             }
         }
     }
