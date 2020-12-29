@@ -14,15 +14,6 @@ I was fed up with them spawning all the time but I also don't want to completely
 * Default value: `100`
 * Categories: `SURVIVAL`, `TOTO`
 
-### returnSpectators 
-Teleports players back to where they were when they changed to spectator.  
-There was a scarpet script which offered this feature however the position did not persist and was forgotten when the server restarted. I decided to implement my own version which saves the survival position against the player.
-
-* Type: `boolean`
-* Default value: `false`
-* Required options: `true`, `false`
-* Categories: `SURVIVAL`, `TOTO`
-
 ### piglinsAngerOnChestUse
 Piglins anger on a player who interacts a chest.  
 Ever just minding your own business in the nether when you thoughtlessly place down a shulker box and open it experience the wrath of piglin bystanders? Well not anymore!
@@ -32,4 +23,12 @@ Ever just minding your own business in the nether when you thoughtlessly place d
 * Required options: `true`, `false`
 * Categories: `SURVIVAL`, `TOTO`
 
+### returnSpectators 
+Teleports players back to where they were when they changed to spectator.  
+There was a scarpet script which offered this feature however the position did not persist and was forgotten when the server restarted. I decided to implement my own version which saves the survival position against the player.
+
+* Type: `boolean`
+* Default value: `false`
+* Required options: `true`, `false`
+* Categories: `SURVIVAL`, `TOTO`
 

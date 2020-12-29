@@ -7,8 +7,8 @@
   ],
   "server": [
     "piglinchest.PiglinBrainMixin",
+    "spectate.GameModeCommandMixin",
     "spectate.ServerPlayerEntityMixin",
-    "spectate.ServerPlayerInteractionManagerMixin",
     "timeofday.ServerWorldMixin",
     "villagecats.CatSpawnerMixin"
   ],

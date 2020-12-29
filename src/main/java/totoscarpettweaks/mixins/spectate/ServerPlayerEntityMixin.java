@@ -52,10 +52,10 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity implements Se
 
     @Override
     public boolean canReturnSpectator() {
-        return survivalPos.isPresent() && survivalWorldKey.isPresent() && !isPlayerStillJoining();
+        return survivalPos.isPresent() && survivalWorldKey.isPresent();
     }
 
-    public Optional<Vec3d> getSurvivalPos() {
+    public Optional<Vec3d> getSurvivalPosition() {
         return survivalPos;
     }
 
@@ -66,7 +66,7 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity implements Se
 
     @Override
     public void rememberSurvivalPosition() {
-        if (isPlayerStillJoining())
+        if (!isPlayerAlive())
             return;
         setSurvivalPosition(getX(), getY(), getZ());
         survivalYaw = getYaw(1);
@@ -76,13 +76,14 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity implements Se
 
     @Override
     public boolean tryTeleportToSurvivalPosition() {
-        if (canReturnSpectator()) {
+        if (isPlayerAlive() && canReturnSpectator()) {
             ServerWorld world = getServer().getWorld(survivalWorldKey.get());
             Vec3d pos = survivalPos.get();
             if (world != null) {
                 teleport(world, pos.x, pos.y, pos.z, survivalYaw, survivalPitch);
                 return true;
             }
+
         }
         return false;
     }
@@ -119,8 +120,8 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity implements Se
         survivalPos = Optional.of(new Vec3d(x, y, z));
     }
 
-    private boolean isPlayerStillJoining() {
-        return networkHandler == null;
+    private boolean isPlayerAlive() {
+        return networkHandler != null && getHealth() > 0.0f;
     }
 
     private static String getTagKey(String key) {

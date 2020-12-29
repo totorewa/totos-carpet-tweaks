@@ -38,8 +38,19 @@ public class ToggleSpectatorCommand {
 
     private static int toggleSpectator(ServerCommandSource source) throws CommandSyntaxException {
         ServerPlayerEntity player = source.getPlayer();
-        boolean inSurvival = player.interactionManager.getGameMode() == SURVIVAL;
-        player.setGameMode(inSurvival ? SPECTATOR : SURVIVAL);
+        if (player instanceof EntityPlayerMPFake) {
+            Messenger.m(player, "r Command cannot be used on a fake player.");
+            return 0;
+        }
+
+        ServerPlayerEntityInterface serverPlayer = (ServerPlayerEntityInterface) player;
+        if (player.interactionManager.getGameMode() == SURVIVAL) {
+            player.setGameMode(SPECTATOR);
+            serverPlayer.rememberSurvivalPosition();
+        } else {
+            player.setGameMode(SURVIVAL);
+            serverPlayer.tryTeleportToSurvivalPosition();
+        }
         return 1;
     }
 
