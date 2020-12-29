@@ -32,3 +32,12 @@ There was a scarpet script which offered this feature however the position did n
 * Required options: `true`, `false`
 * Categories: `SURVIVAL`, `TOTO`
 
+### shulkerBulletsSpawnShulkers
+Implements the shulker spawning from the 1.17 Caves & Cliffs update.  
+If a shulker is open, shot by a projectile, and can successfully teleport away, there is a chance a new shulker will spawn in the location it teleported from.
+
+* Type: `boolean`
+* Default value: `false`
+* Required options: `true`, `false`
+* Categories: `FEATURE`, `SURVIVAL`, `TOTO`
+
