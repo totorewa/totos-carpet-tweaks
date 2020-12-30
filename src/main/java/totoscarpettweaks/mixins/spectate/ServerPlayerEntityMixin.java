@@ -1,6 +1,9 @@
 package totoscarpettweaks.mixins.spectate;
 
+import carpet.utils.Messenger;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.math.Vec3d;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import totoscarpettweaks.TotoCarpetSettings;
 import totoscarpettweaks.fakes.ServerPlayerEntityInterface;
 import com.mojang.authlib.GameProfile;
@@ -34,29 +37,27 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity implements Se
     private static final String NBT_SURVIVALWORLD = getTagKey("SurvivalWorld");
     private static final String UNKNOWN = "Unknown";
 
-    private Optional<Vec3d> survivalPos;
+    private Vec3d survivalPos;
     private float survivalYaw;
     private float survivalPitch;
-    private Optional<RegistryKey<World>> survivalWorldKey;
+    private RegistryKey<World> survivalWorldKey;
 
     @Shadow
     public ServerPlayNetworkHandler networkHandler;
 
     public ServerPlayerEntityMixin(World world, BlockPos pos, float yaw, GameProfile profile) {
         super(world, pos, yaw, profile);
-        survivalWorldKey = Optional.empty();
-        survivalPos = Optional.empty();
     }
 
     @Shadow
     public abstract void teleport(ServerWorld targetWorld, double x, double y, double z, float yaw, float pitch);
 
     @Override
-    public boolean canReturnSpectator() {
-        return survivalPos.isPresent() && survivalWorldKey.isPresent();
+    public boolean toto$hasReturnPosition() {
+        return survivalPos != null && survivalWorldKey != null;
     }
 
-    public Optional<Vec3d> getSurvivalPosition() {
+    public Vec3d getSurvivalPosition() {
         return survivalPos;
     }
 
@@ -68,13 +69,15 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity implements Se
         return survivalPitch;
     }
 
-    public Optional<RegistryKey<World>> getSurvivalWorldKey() {
+    public RegistryKey<World> getSurvivalWorldKey() {
         return survivalWorldKey;
     }
 
     @Override
     public String getSurvivalDimensionName() {
-        return survivalWorldKey.map(r -> r.getValue().getPath()).orElse(UNKNOWN);
+        if (survivalWorldKey == null)
+            return UNKNOWN;
+        return survivalWorldKey.getValue().getPath();
     }
 
     @Override
@@ -84,16 +87,15 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity implements Se
         setSurvivalPosition(getX(), getY(), getZ());
         survivalYaw = getYaw(1);
         survivalPitch = getPitch(1);
-        survivalWorldKey = Optional.ofNullable(getEntityWorld().getRegistryKey());
+        survivalWorldKey = getEntityWorld().getRegistryKey();
     }
 
     @Override
     public boolean tryTeleportToSurvivalPosition() {
-        if (isPlayerAlive() && canReturnSpectator()) {
-            ServerWorld world = getServer().getWorld(survivalWorldKey.get());
-            Vec3d pos = survivalPos.get();
+        if (isPlayerAlive() && toto$hasReturnPosition()) {
+            ServerWorld world = getServer().getWorld(survivalWorldKey);
             if (world != null) {
-                teleport(world, pos.x, pos.y, pos.z, survivalYaw, survivalPitch);
+                teleport(world, survivalPos.x, survivalPos.y, survivalPos.z, survivalYaw, survivalPitch);
                 return true;
             }
 
@@ -103,14 +105,13 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity implements Se
 
     @Inject(method = "writeCustomDataToTag", at = @At("HEAD"))
     private void writeSurvivalPosition(CompoundTag tag, CallbackInfo ci) {
-        if (TotoCarpetSettings.returnSpectators && canReturnSpectator()) {
-            Vec3d pos = survivalPos.get();
-            tag.putDouble(NBT_SURVIVALX, pos.x);
-            tag.putDouble(NBT_SURVIVALY, pos.y);
-            tag.putDouble(NBT_SURVIVALZ, pos.z);
+        if (TotoCarpetSettings.returnSpectators && toto$hasReturnPosition()) {
+            tag.putDouble(NBT_SURVIVALX, survivalPos.x);
+            tag.putDouble(NBT_SURVIVALY, survivalPos.y);
+            tag.putDouble(NBT_SURVIVALZ, survivalPos.z);
             tag.putFloat(NBT_SURVIVALYAW, survivalYaw);
             tag.putFloat(NBT_SURVIVALPITCH, survivalPitch);
-            tag.putString(NBT_SURVIVALWORLD, survivalWorldKey.map(rk -> rk.getValue().toString()).orElse("none"));
+            tag.putString(NBT_SURVIVALWORLD, survivalWorldKey.getValue().toString());
         }
     }
 
@@ -126,7 +127,7 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity implements Se
             if (tag.contains(NBT_SURVIVALWORLD)) {
                 Identifier worldId = Identifier.tryParse(tag.getString(NBT_SURVIVALWORLD));
                 if (worldId != null)
-                    survivalWorldKey = Optional.ofNullable(RegistryKey.of(Registry.DIMENSION, worldId));
+                    survivalWorldKey = RegistryKey.of(Registry.DIMENSION, worldId);
             }
         }
     }
@@ -141,7 +142,7 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity implements Se
     }
 
     private void setSurvivalPosition(double x, double y, double z) {
-        survivalPos = Optional.of(new Vec3d(x, y, z));
+        survivalPos = new Vec3d(x, y, z);
     }
 
     private boolean isPlayerAlive() {

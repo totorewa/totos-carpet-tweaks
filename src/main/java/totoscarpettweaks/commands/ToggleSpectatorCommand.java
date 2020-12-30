@@ -68,12 +68,12 @@ public class ToggleSpectatorCommand {
 
         ServerPlayerEntityInterface totoPlayer = (ServerPlayerEntityInterface) player;
 
-        if (!totoPlayer.canReturnSpectator()) {
+        if (!totoPlayer.toto$hasReturnPosition()) {
             Messenger.m(player, "r Sorry, I can't remember your last position.");
             return 0;
         }
 
-        Vec3d pos = totoPlayer.getSurvivalPosition().orElse(Vec3d.ZERO);
+        Vec3d pos = totoPlayer.getSurvivalPosition();
         Messenger.m(player,
                 "y X ",
                 String.format(POSITION_FORMAT_TEMPLATE, pos.x),
