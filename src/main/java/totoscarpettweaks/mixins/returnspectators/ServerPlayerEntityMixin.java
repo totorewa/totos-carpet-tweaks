@@ -1,9 +1,6 @@
-package totoscarpettweaks.mixins.spectate;
+package totoscarpettweaks.mixins.returnspectators;
 
-import carpet.utils.Messenger;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.math.Vec3d;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import totoscarpettweaks.TotoCarpetSettings;
 import totoscarpettweaks.fakes.ServerPlayerEntityInterface;
 import com.mojang.authlib.GameProfile;
@@ -22,8 +19,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.Optional;
 
 
 @Mixin(ServerPlayerEntity.class)

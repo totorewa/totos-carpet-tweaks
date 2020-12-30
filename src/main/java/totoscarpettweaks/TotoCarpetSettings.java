@@ -35,6 +35,9 @@ public class TotoCarpetSettings {
     @Rule(desc = "Adds shulker spawning from the Caves & Cliffs 1.17 update", category = {SURVIVAL, FEATURE, TOTO})
     public static boolean shulkerBulletsSpawnShulkers = false;
 
+    @Rule(desc = "Makes spectators visible to non-spectator players", category = {TOTO})
+    public static boolean visibleSpectators = false;
+
     @Rule(desc = "Enables /ts command to toggle spectator mode", category = {COMMAND, TOTO})
     public static String commandToggleSpectator = "true";
 }

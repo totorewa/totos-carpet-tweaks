@@ -1,7 +1,6 @@
-package totoscarpettweaks.mixins.spectate;
+package totoscarpettweaks.mixins.returnspectators;
 
 import carpet.patches.EntityPlayerMPFake;
-import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.server.command.GameModeCommand;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -12,8 +11,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import totoscarpettweaks.TotoCarpetSettings;
 import totoscarpettweaks.fakes.ServerPlayerEntityInterface;
-
-import java.util.Collection;
 
 import static net.minecraft.world.GameMode.SURVIVAL;
 
