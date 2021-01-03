@@ -8,7 +8,7 @@
   "server": [
     "globalmajorpositive.VillagerGossips$ReputationInvoker",
     "globalmajorpositive.VillagerGossipsMixin",
-    "piglinchest.PiglinBrainMixin",
+    "piglinguarding.PiglinBrainMixin",
     "returnspectators.GameModeCommandMixin",
     "returnspectators.ServerPlayerEntityMixin",
     "seespectators.ServerPlayerEntityMixin",

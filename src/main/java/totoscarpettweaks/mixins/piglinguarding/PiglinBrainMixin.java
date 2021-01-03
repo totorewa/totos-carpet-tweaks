@@ -1,4 +1,4 @@
-package totoscarpettweaks.mixins.piglinchest;
+package totoscarpettweaks.mixins.piglinguarding;
 
 import net.minecraft.entity.mob.PiglinBrain;
 import net.minecraft.entity.player.PlayerEntity;
@@ -12,7 +12,7 @@ import totoscarpettweaks.TotoCarpetSettings;
 public class PiglinBrainMixin {
     @Inject(method = "onGuardedBlockInteracted", at = @At("HEAD"), cancellable = true)
     private static void cancelOnGuardedBlockInteracted(PlayerEntity player, boolean blockOpen, CallbackInfo ci) {
-        if (!TotoCarpetSettings.piglinsAngerOnChestUse)
+        if (TotoCarpetSettings.noPiglinGuarding)
             ci.cancel();
     }
 }

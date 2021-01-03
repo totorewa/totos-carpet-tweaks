@@ -14,12 +14,12 @@ I was fed up with them spawning all the time but I also don't want to completely
 * Default value: `100`
 * Categories: `SURVIVAL`, `TOTO`
 
-### piglinsAngerOnChestUse
-Piglins anger on a player who interacts a chest.  
+### noPiglinGuarding
+Disables piglins attacking when a player interacts or breaks a block they guard.  
 Ever just minding your own business in the nether when you thoughtlessly place down a shulker box and open it experience the wrath of piglin bystanders? Well not anymore!
 
 * Type: `boolean`
-* Default value: `true`
+* Default value: `false`
 * Required options: `true`, `false`
 * Categories: `SURVIVAL`, `TOTO`
 

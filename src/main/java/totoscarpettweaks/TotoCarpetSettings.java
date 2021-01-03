@@ -26,8 +26,8 @@ public class TotoCarpetSettings {
     @Rule(desc = "Sets chance cat will spawn in a village", category = {SURVIVAL, TOTO}, validate = validateCatSpawnRate.class, options = {"0", "25", "50", "75", "100"}, strict = false)
     public static int catSpawnChance = 100;
 
-    @Rule(desc = "Piglins anger when a player interacts with a chest", category = {SURVIVAL, TOTO})
-    public static boolean piglinsAngerOnChestUse = true;
+    @Rule(desc = "Stops Piglins angering when a block they guard is interacted with or broken", category = {SURVIVAL, TOTO})
+    public static boolean noPiglinGuarding = false;
 
     @Rule(desc = "Prevent players from teleporting when using spectator mode by returning them to their previous survival position", category = {SURVIVAL, TOTO})
     public static boolean returnSpectators = false;
