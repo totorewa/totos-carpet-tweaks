@@ -32,6 +32,9 @@ public class TotoCarpetSettings {
     @Rule(desc = "Prevent players from teleporting when using spectator mode by returning them to their previous survival position", category = {SURVIVAL, TOTO})
     public static boolean returnSpectators = false;
 
+    @Rule(desc = "Major positive reputation is shared amongst all players", category = {SURVIVAL, TOTO})
+    public static boolean sharedVillagerDiscounts = false;
+
     @Rule(desc = "Adds shulker spawning from the Caves & Cliffs 1.17 update", category = {SURVIVAL, FEATURE, TOTO})
     public static boolean shulkerBulletsSpawnShulkers = false;
 

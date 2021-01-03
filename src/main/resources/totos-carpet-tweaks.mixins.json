@@ -6,6 +6,8 @@
   "mixins": [
   ],
   "server": [
+    "globalmajorpositive.VillagerGossips$ReputationInvoker",
+    "globalmajorpositive.VillagerGossipsMixin",
     "piglinchest.PiglinBrainMixin",
     "returnspectators.GameModeCommandMixin",
     "returnspectators.ServerPlayerEntityMixin",
