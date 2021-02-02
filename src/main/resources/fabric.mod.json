@@ -32,5 +32,8 @@
     "carpet": "*"
   },
   "suggests": {
+  },
+  "custom": {
+    "modmenu:parent": "carpet"
   }
 }
