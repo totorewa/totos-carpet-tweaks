@@ -36,7 +36,7 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity {
 
     @Inject(method = "canBeSpectated", at = @At("HEAD"), cancellable = true)
     private void allowSpectatorsToBeSpectated(ServerPlayerEntity spectator, CallbackInfoReturnable<Boolean> cir) {
-        if (!TotoCarpetSettings.visibleSpectators) {
+        if (TotoCarpetSettings.visibleSpectators) {
             if (spectator.isSpectator()) cir.setReturnValue(getCameraEntity() == (Object) this);
             else cir.setReturnValue(super.canBeSpectated(spectator));
         }
