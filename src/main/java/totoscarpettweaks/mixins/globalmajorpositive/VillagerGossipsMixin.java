@@ -26,11 +26,10 @@ public abstract class VillagerGossipsMixin {
     public void overrideReputation(UUID target, Predicate<VillageGossipType> filter, CallbackInfoReturnable<Integer> cir) {
         if (TotoCarpetSettings.sharedVillagerDiscounts && filter.test(MAJOR_POSITIVE)) {
             VillagerGossips$ReputationInvoker targetReputation = (VillagerGossips$ReputationInvoker)entityReputation.get(target);
-            if (targetReputation == null) {
-                cir.setReturnValue(0);
-                return;
+            int otherRep = 0;
+            if (targetReputation != null) {
+                otherRep = targetReputation.toto$getValueFor(vgt -> filter.test(vgt) && !vgt.equals(MAJOR_POSITIVE));
             }
-            int otherRep = targetReputation.toto$getValueFor(vgt -> filter.test(vgt) && !vgt.equals(MAJOR_POSITIVE));
             int majorPositiveRep = entityReputation.values()
                     .stream()
                     .mapToInt(r -> ((VillagerGossips$ReputationInvoker) r).toto$getValueFor(vgt -> vgt.equals(MAJOR_POSITIVE)))
