@@ -12,7 +12,6 @@
     "returnspectators.GameModeCommandMixin",
     "returnspectators.ServerPlayerEntityMixin",
     "seespectators.ServerPlayerEntityMixin",
-    "shulkerspawning.ShulkerEntityMixin",
     "timeofday.ServerWorldMixin",
     "villagecats.CatSpawnerMixin"
   ],
