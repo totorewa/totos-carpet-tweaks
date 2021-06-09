@@ -45,10 +45,10 @@ public class ToggleSpectatorCommand {
 
         ServerPlayerEntityInterface serverPlayer = (ServerPlayerEntityInterface) player;
         if (player.interactionManager.getGameMode() == SURVIVAL) {
-            player.setGameMode(SPECTATOR);
+            player.changeGameMode(SPECTATOR);
             serverPlayer.rememberSurvivalPosition();
         } else {
-            player.setGameMode(SURVIVAL);
+            player.changeGameMode(SURVIVAL);
             serverPlayer.tryTeleportToSurvivalPosition();
         }
         return 1;

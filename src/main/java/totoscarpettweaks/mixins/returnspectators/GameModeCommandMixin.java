@@ -17,7 +17,7 @@ import static net.minecraft.world.GameMode.SURVIVAL;
 
 @Mixin(GameModeCommand.class)
 public class GameModeCommandMixin {
-    @Inject(method = "setGameMode", at = @At("RETURN"))
+    @Inject(method = "sendFeedback", at = @At("RETURN"))
     private static void beforeExecute(ServerCommandSource source, ServerPlayerEntity player, GameMode gameMode, CallbackInfo ci) {
         if (TotoCarpetSettings.returnSpectators && !(player instanceof EntityPlayerMPFake)) {
             // If changing to survival mode, teleport to previous survival position

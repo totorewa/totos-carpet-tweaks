@@ -35,8 +35,8 @@ public class TotoCarpetSettings {
     @Rule(desc = "Major positive reputation is shared amongst all players", category = {SURVIVAL, TOTO})
     public static boolean sharedVillagerDiscounts = false;
 
-    @Rule(desc = "Adds shulker spawning from the Caves & Cliffs 1.17 update", category = {SURVIVAL, FEATURE, TOTO})
-    public static boolean shulkerBulletsSpawnShulkers = false;
+    @Rule(desc = "Enables shulker spawning from the Caves & Cliffs 1.17 update", category = {SURVIVAL, FEATURE, TOTO})
+    public static boolean shulkerBulletsSpawnShulkers = true;
 
     @Rule(desc = "Makes spectators visible to non-spectator players", category = {TOTO})
     public static boolean visibleSpectators = false;

@@ -1,11 +1,11 @@
 package totoscarpettweaks.mixins.returnspectators;
 
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.Vec3d;
 import totoscarpettweaks.TotoCarpetSettings;
 import totoscarpettweaks.fakes.ServerPlayerEntityInterface;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -98,8 +98,8 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity implements Se
         return false;
     }
 
-    @Inject(method = "writeCustomDataToTag", at = @At("HEAD"))
-    private void writeSurvivalPosition(CompoundTag tag, CallbackInfo ci) {
+    @Inject(method = "writeCustomDataToNbt", at = @At("HEAD"))
+    private void writeSurvivalPosition(NbtCompound tag, CallbackInfo ci) {
         if (TotoCarpetSettings.returnSpectators && toto$hasReturnPosition()) {
             tag.putDouble(NBT_SURVIVALX, survivalPos.x);
             tag.putDouble(NBT_SURVIVALY, survivalPos.y);
@@ -110,8 +110,8 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity implements Se
         }
     }
 
-    @Inject(method = "readCustomDataFromTag", at = @At("HEAD"))
-    private void readSurvivalPosition(CompoundTag tag, CallbackInfo ci) {
+    @Inject(method = "readCustomDataFromNbt", at = @At("HEAD"))
+    private void readSurvivalPosition(NbtCompound tag, CallbackInfo ci) {
         if (TotoCarpetSettings.returnSpectators) {
             if (tag.contains(NBT_SURVIVALX) && tag.contains(NBT_SURVIVALY) && tag.contains(NBT_SURVIVALZ))
                 setSurvivalPosition(tag.getDouble(NBT_SURVIVALX), tag.getDouble(NBT_SURVIVALY), tag.getDouble(NBT_SURVIVALZ));
@@ -122,7 +122,7 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity implements Se
             if (tag.contains(NBT_SURVIVALWORLD)) {
                 Identifier worldId = Identifier.tryParse(tag.getString(NBT_SURVIVALWORLD));
                 if (worldId != null)
-                    survivalWorldKey = RegistryKey.of(Registry.DIMENSION, worldId);
+                    survivalWorldKey = RegistryKey.of(Registry.WORLD_KEY, worldId);
             }
         }
     }

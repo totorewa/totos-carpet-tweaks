@@ -43,11 +43,11 @@ All other types of reputation are not shared as the curing discounts is the only
 * Categories: `SURVIVAL`, `TOTO`
 
 ### shulkerBulletsSpawnShulkers
-Implements the shulker spawning from the 1.17 Caves & Cliffs update.  
+Enables the shulker spawning from the 1.17 Caves & Cliffs update.  
 If a shulker is open, shot by a projectile, and can successfully teleport away, there is a chance a new shulker will spawn in the location it teleported from.
 
 * Type: `boolean`
-* Default value: `false`
+* Default value: `true`
 * Required options: `true`, `false`
 * Categories: `FEATURE`, `SURVIVAL`, `TOTO`
 
