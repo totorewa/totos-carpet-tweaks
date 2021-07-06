@@ -3,11 +3,8 @@
 # certain platforms or Java versions, and provides a first line of defence
 # against bad commits.
 
-name: build
-on:
-  push:
-    branches:
-      - 'mc1*'
+name: dev-build
+on: [push, pull_request]
 
 
 jobs:
@@ -26,8 +23,3 @@ jobs:
         run: chmod +x ./gradlew
       - name: build
         run: ./gradlew build
-      - name: capture build artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: Artifacts
-          path: build/libs/
