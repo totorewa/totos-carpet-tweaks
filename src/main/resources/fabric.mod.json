@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "totos-carpet-tweaks",
+  "version": "${version}",
+
+  "name": "Toto's Carpet Tweaks",
+  "description": "Adds a few tweaks to the survival experience",
+  "authors": [
+    "Totorewa"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/totos-carpet-tweaks/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "totoscarpettweaks.TotoCarpetMod"
+    ]
+  },
+  "mixins": [
+    "totos-carpet-tweaks.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "minecraft": "1.17.x",
+    "java": ">=16",
+    "carpet": "*"
+  },
+  "suggests": {
+  },
+  "custom": {
+    "modmenu": {
+      "parent": "carpet"
+    }
+  }
+}
