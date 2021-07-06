@@ -1,0 +1,22 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "totoscarpettweaks.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+  ],
+  "server": [
+    "globalmajorpositive.VillagerGossips$ReputationInvoker",
+    "globalmajorpositive.VillagerGossipsMixin",
+    "piglinguarding.PiglinBrainMixin",
+    "returnspectators.GameModeCommandMixin",
+    "returnspectators.ServerPlayerEntityMixin",
+    "seespectators.ServerPlayerEntityMixin",
+    "shulkerspawning.ShulkerEntityMixin",
+    "timeofday.ServerWorldMixin",
+    "villagecats.CatSpawnerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
