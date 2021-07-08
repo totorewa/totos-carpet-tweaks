@@ -86,16 +86,25 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity implements Se
     }
 
     @Override
-    public boolean tryTeleportToSurvivalPosition() {
-        if (isPlayerAlive() && toto$hasReturnPosition()) {
+    public boolean tryReturnToSurvivalPosition() {
+        if (toto$hasReturnPosition() && networkHandler != null && !isDead()) {
             ServerWorld world = getServer().getWorld(survivalWorldKey);
             if (world != null) {
                 teleport(world, survivalPos.x, survivalPos.y, survivalPos.z, survivalYaw, survivalPitch);
+                clearSurvivalPosition();
                 return true;
             }
 
         }
+        clearSurvivalPosition();
         return false;
+    }
+
+    private void clearSurvivalPosition() {
+        survivalPos = null;
+        survivalWorldKey = null;
+        survivalYaw = 0;
+        survivalPitch = 0;
     }
 
     @Inject(method = "writeCustomDataToNbt", at = @At("HEAD"))
