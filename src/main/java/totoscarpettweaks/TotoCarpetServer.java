@@ -4,9 +4,12 @@ import carpet.CarpetExtension;
 import carpet.CarpetServer;
 import carpet.logging.Logger;
 import carpet.logging.LoggerRegistry;
+import net.minecraft.server.network.ServerPlayerEntity;
 import totoscarpettweaks.commands.ToggleSpectatorCommand;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.server.command.ServerCommandSource;
+import totoscarpettweaks.fakes.ServerPlayerEntityInterface;
+import totoscarpettweaks.listeners.PlayerLoggedInListener;
 
 public class TotoCarpetServer implements CarpetExtension {
 	public static void noop() { }
@@ -15,9 +18,12 @@ public class TotoCarpetServer implements CarpetExtension {
 		CarpetServer.manageExtension(new TotoCarpetServer());
 	}
 
+	private PlayerLoggedInListener playerLoggedInListener;
+
 	@Override
 	public void onGameStarted() {
 		CarpetServer.settingsManager.parseSettingsClass(TotoCarpetSettings.class);
+		playerLoggedInListener = new PlayerLoggedInListener();
 	}
 
 	@Override
@@ -32,6 +38,11 @@ public class TotoCarpetServer implements CarpetExtension {
 		} catch (NoSuchFieldException e) {
 			throw new RuntimeException("Could not create logger: villagerSchedule");
 		}
+	}
+
+	@Override
+	public void onPlayerLoggedIn(ServerPlayerEntity player) {
+		playerLoggedInListener.handle(player);
 	}
 
 	@Override

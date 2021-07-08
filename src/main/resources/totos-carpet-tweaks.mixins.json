@@ -9,8 +9,8 @@
     "globalmajorpositive.VillagerGossips$ReputationInvoker",
     "globalmajorpositive.VillagerGossipsMixin",
     "piglinguarding.PiglinBrainMixin",
-    "returnspectators.GameModeCommandMixin",
     "returnspectators.ServerPlayerEntityMixin",
+    "returnspectators.ServerPlayerInteractionManagerMixin",
     "seespectators.ServerPlayerEntityMixin",
     "timeofday.ServerWorldMixin",
     "villagecats.CatSpawnerMixin"
