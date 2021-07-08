@@ -36,6 +36,7 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity implements Se
     private float survivalYaw;
     private float survivalPitch;
     private RegistryKey<World> survivalWorldKey;
+    private boolean hasConnected;
 
     @Shadow
     public ServerPlayNetworkHandler networkHandler;
@@ -86,16 +87,34 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity implements Se
     }
 
     @Override
-    public boolean tryTeleportToSurvivalPosition() {
-        if (isPlayerAlive() && toto$hasReturnPosition()) {
+    public boolean tryReturnToSurvivalPosition() {
+        if (!hasConnected) {
+            return false;
+        }
+
+        if (toto$hasReturnPosition() && networkHandler != null && !isDead()) {
             ServerWorld world = getServer().getWorld(survivalWorldKey);
             if (world != null) {
                 teleport(world, survivalPos.x, survivalPos.y, survivalPos.z, survivalYaw, survivalPitch);
+                clearSurvivalPosition();
                 return true;
             }
 
         }
+        clearSurvivalPosition();
         return false;
+    }
+
+    @Override
+    public void toto$connected() {
+        hasConnected = true;
+    }
+
+    private void clearSurvivalPosition() {
+        survivalPos = null;
+        survivalWorldKey = null;
+        survivalYaw = 0;
+        survivalPitch = 0;
     }
 
     @Inject(method = "writeCustomDataToTag", at = @At("HEAD"))
@@ -134,6 +153,7 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity implements Se
         survivalPitch = oldServerPlayer.getSurvivalPitch();
         survivalYaw = oldServerPlayer.getSurvivalYaw();
         survivalWorldKey = oldServerPlayer.getSurvivalWorldKey();
+        if (hasConnected) oldServerPlayer.toto$connected();
     }
 
     private void setSurvivalPosition(double x, double y, double z) {

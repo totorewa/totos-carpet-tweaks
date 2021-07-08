@@ -14,5 +14,6 @@ public interface ServerPlayerEntityInterface {
     public RegistryKey<World> getSurvivalWorldKey();
     public String getSurvivalDimensionName();
     public void rememberSurvivalPosition();
-    public boolean tryTeleportToSurvivalPosition();
+    public boolean tryReturnToSurvivalPosition();
+    public void toto$connected();
 }
