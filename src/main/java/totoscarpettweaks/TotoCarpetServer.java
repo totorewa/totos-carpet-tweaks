@@ -34,7 +34,7 @@ public class TotoCarpetServer implements CarpetExtension {
 	@Override
 	public void registerLoggers() {
 		try {
-			LoggerRegistry.registerLogger("villagerSchedule", new Logger(TotoCarpetServer.class.getField("__villagerSchedule"), "villagerSchedule", null, null));
+			LoggerRegistry.registerLogger("villagerSchedule", new Logger(TotoCarpetServer.class.getField("__villagerSchedule"), "villagerSchedule", null, null, false));
 		} catch (NoSuchFieldException e) {
 			throw new RuntimeException("Could not create logger: villagerSchedule");
 		}
