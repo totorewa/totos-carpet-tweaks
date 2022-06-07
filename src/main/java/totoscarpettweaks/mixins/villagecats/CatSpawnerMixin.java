@@ -1,9 +1,9 @@
 package totoscarpettweaks.mixins.villagecats;
 
+import net.minecraft.world.spawner.CatSpawner;
 import totoscarpettweaks.TotoCarpetSettings;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.gen.CatSpawner;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

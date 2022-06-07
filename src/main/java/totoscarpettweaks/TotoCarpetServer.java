@@ -4,6 +4,7 @@ import carpet.CarpetExtension;
 import carpet.CarpetServer;
 import carpet.logging.Logger;
 import carpet.logging.LoggerRegistry;
+import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.server.network.ServerPlayerEntity;
 import totoscarpettweaks.commands.ToggleSpectatorCommand;
 import com.mojang.brigadier.CommandDispatcher;
@@ -27,7 +28,8 @@ public class TotoCarpetServer implements CarpetExtension {
 	}
 
 	@Override
-	public void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher) {
+	public void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher,
+								 final CommandRegistryAccess commandBuildContext) {
 		ToggleSpectatorCommand.register(dispatcher);
 	}
 

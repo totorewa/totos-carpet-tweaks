@@ -1,7 +1,10 @@
 package totoscarpettweaks.mixins.returnspectators;
 
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.encryption.PlayerPublicKey;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.Vec3d;
+import org.jetbrains.annotations.Nullable;
 import totoscarpettweaks.TotoCarpetSettings;
 import totoscarpettweaks.fakes.ServerPlayerEntityInterface;
 import com.mojang.authlib.GameProfile;
@@ -40,8 +43,8 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity implements Se
     @Shadow
     public ServerPlayNetworkHandler networkHandler;
 
-    public ServerPlayerEntityMixin(World world, BlockPos pos, float yaw, GameProfile profile) {
-        super(world, pos, yaw, profile);
+    public ServerPlayerEntityMixin(MinecraftServer server, ServerWorld world, GameProfile profile, @Nullable PlayerPublicKey publicKey) {
+        super(world, world.getSpawnPos(), world.getSpawnAngle(), profile, publicKey);
     }
 
     @Shadow
@@ -138,7 +141,7 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity implements Se
 
     @Inject(method = "copyFrom", at = @At("RETURN"))
     private void copyFrom(ServerPlayerEntity oldPlayer, boolean alive, CallbackInfo ci) {
-        ServerPlayerEntityInterface oldServerPlayer = (ServerPlayerEntityInterface)oldPlayer;
+        ServerPlayerEntityInterface oldServerPlayer = (ServerPlayerEntityInterface) oldPlayer;
         survivalPos = oldServerPlayer.getSurvivalPosition();
         survivalPitch = oldServerPlayer.getSurvivalPitch();
         survivalYaw = oldServerPlayer.getSurvivalYaw();
