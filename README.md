@@ -4,6 +4,7 @@
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/totorewa/totos-carpet-tweaks/build?style=flat-square)
 ![GitHub issues](https://img.shields.io/github/issues/totorewa/totos-carpet-tweaks?style=flat-square)
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/totorewa/totos-carpet-tweaks?display_name=tag&include_prereleases&style=flat-square)
+[![CurseForge versions](https://cf.way2muchnoise.eu/versions/633476.svg)](https://www.curseforge.com/minecraft/mc-mods/totos-carpet-tweaks)
 
 This mod extends the [carpet mod](https://github.com/gnembon/fabric-carpet) and adds a few changes to the survival experience.   
 This mod came about while playing some SMP and there were a few quality of life changes we wanted to make. The mod is starting off with just a spectator mode feature and an anti-cat spawner, but will grow overtime as I get around to it.
