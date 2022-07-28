@@ -1,0 +1,16 @@
+{
+  "carpet.category.totos_tweaks": "totos-tweaks",
+
+  "carpet.rule.catSpawnChance.desc": "Sets chance cat will spawn in a village",
+
+  "carpet.rule.noPiglinGuarding.desc": "Prevent piglin aggro when breaking or interacting with a piglin-guarded block",
+
+  "carpet.rule.returnSpectators.desc": "Stores player position when switching to spectator and returns them to it when switching back to survival",
+
+  "carpet.rule.sharedVillagerDiscounts.desc": "Shares major positive reputation amongst all players",
+
+  "carpet.rule.visibleSpectators.desc": "Makes spectators visible to non-spectator players",
+
+  "carpet.rule.commandToggleSpectator.desc": "Enables /ts command to toggle spectator mode",
+  "carpet.rule.commandToggleSpectator.extra.0": "Requires returnSpectators to be set to true."
+}

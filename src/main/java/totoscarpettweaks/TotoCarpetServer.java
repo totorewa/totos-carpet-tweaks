@@ -2,15 +2,18 @@ package totoscarpettweaks;
 
 import carpet.CarpetExtension;
 import carpet.CarpetServer;
+import carpet.CarpetSettings;
 import carpet.logging.Logger;
 import carpet.logging.LoggerRegistry;
+import carpet.utils.Translations;
+import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.command.CommandRegistryAccess;
+import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import totoscarpettweaks.commands.ToggleSpectatorCommand;
-import com.mojang.brigadier.CommandDispatcher;
-import net.minecraft.server.command.ServerCommandSource;
-import totoscarpettweaks.fakes.ServerPlayerEntityInterface;
 import totoscarpettweaks.listeners.PlayerLoggedInListener;
+
+import java.util.Map;
 
 public class TotoCarpetServer implements CarpetExtension {
 	public static void noop() { }
@@ -50,6 +53,11 @@ public class TotoCarpetServer implements CarpetExtension {
 	@Override
 	public String version() {
 		return "totos-extras";
+	}
+
+	@Override
+	public Map<String, String> canHasTranslations(String lang) {
+		return Translations.getTranslationFromResourcePath(String.format("assets/totos-carpet-tweaks/lang/%s.json", lang));
 	}
 
 	public static boolean __villagerSchedule;

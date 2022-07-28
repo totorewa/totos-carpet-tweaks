@@ -1,19 +1,18 @@
 package totoscarpettweaks.commands;
 
 import carpet.patches.EntityPlayerMPFake;
-import carpet.settings.SettingsManager;
+import carpet.utils.CommandHelper;
 import carpet.utils.Messenger;
+import com.mojang.brigadier.CommandDispatcher;
+import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.Vec3d;
 import totoscarpettweaks.TotoCarpetSettings;
 import totoscarpettweaks.fakes.ServerPlayerEntityInterface;
-import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.network.ServerPlayerEntity;
 
 import static net.minecraft.server.command.CommandManager.literal;
-import static net.minecraft.world.GameMode.SURVIVAL;
 import static net.minecraft.world.GameMode.SPECTATOR;
+import static net.minecraft.world.GameMode.SURVIVAL;
 
 /***
  * While the mod will remember survival positions when using the standard /gamemode command or F3+N,
@@ -28,7 +27,7 @@ public class ToggleSpectatorCommand {
         dispatcher.register(
                 literal("ts")
                         .requires(c -> TotoCarpetSettings.returnSpectators &&
-                                SettingsManager.canUseCommand(c, (Object) TotoCarpetSettings.commandToggleSpectator))
+                                CommandHelper.canUseCommand(c, (Object) TotoCarpetSettings.commandToggleSpectator))
                         .executes(c -> toggleSpectator(c.getSource()))
                         .then(
                                 literal("info")
@@ -36,7 +35,7 @@ public class ToggleSpectatorCommand {
                         ));
     }
 
-    private static int toggleSpectator(ServerCommandSource source) throws CommandSyntaxException {
+    private static int toggleSpectator(ServerCommandSource source) {
         ServerPlayerEntity player = source.getPlayer();
         if (player instanceof EntityPlayerMPFake) {
             Messenger.m(player, "r Command cannot be used on a fake player.");
@@ -51,7 +50,7 @@ public class ToggleSpectatorCommand {
         return 1;
     }
 
-    private static int spectatorInfo(ServerCommandSource source) throws CommandSyntaxException {
+    private static int spectatorInfo(ServerCommandSource source) {
         ServerPlayerEntity player = source.getPlayer();
         if (!player.isSpectator()) {
             Messenger.m(player, "r You are not in spectator mode.");
