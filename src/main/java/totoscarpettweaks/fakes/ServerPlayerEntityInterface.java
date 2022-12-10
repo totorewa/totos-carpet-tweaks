@@ -1,7 +1,7 @@
 package totoscarpettweaks.fakes;
 
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 
 import java.util.Optional;

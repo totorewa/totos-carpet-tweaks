@@ -1,27 +1,25 @@
 package totoscarpettweaks.mixins.returnspectators;
 
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.encryption.PlayerPublicKey;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.math.Vec3d;
-import org.jetbrains.annotations.Nullable;
-import totoscarpettweaks.TotoCarpetSettings;
-import totoscarpettweaks.fakes.ServerPlayerEntityInterface;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import totoscarpettweaks.TotoCarpetSettings;
+import totoscarpettweaks.fakes.ServerPlayerEntityInterface;
 
 
 @Mixin(ServerPlayerEntity.class)
@@ -43,8 +41,8 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity implements Se
     @Shadow
     public ServerPlayNetworkHandler networkHandler;
 
-    public ServerPlayerEntityMixin(MinecraftServer server, ServerWorld world, GameProfile profile, @Nullable PlayerPublicKey publicKey) {
-        super(world, world.getSpawnPos(), world.getSpawnAngle(), profile, publicKey);
+    public ServerPlayerEntityMixin(World world, BlockPos pos, float yaw, GameProfile gameProfile) {
+        super(world, pos, yaw, gameProfile);
     }
 
     @Shadow
@@ -134,7 +132,7 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity implements Se
             if (tag.contains(NBT_SURVIVALWORLD)) {
                 Identifier worldId = Identifier.tryParse(tag.getString(NBT_SURVIVALWORLD));
                 if (worldId != null)
-                    survivalWorldKey = RegistryKey.of(Registry.WORLD_KEY, worldId);
+                    survivalWorldKey = RegistryKey.of(RegistryKeys.WORLD, worldId);
             }
         }
     }
