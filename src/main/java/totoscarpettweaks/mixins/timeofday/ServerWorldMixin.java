@@ -1,5 +1,6 @@
 package totoscarpettweaks.mixins.timeofday;
 
+import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
@@ -19,9 +20,10 @@ import java.util.function.Supplier;
 public abstract class ServerWorldMixin extends World {
     protected ServerWorldMixin(
             MutableWorldProperties properties, RegistryKey<World> registryRef,
+            DynamicRegistryManager drm,
             RegistryEntry<DimensionType> dimension, Supplier<Profiler> profiler,
             boolean isClient, boolean debugWorld, long seed, int maxChainedNeighborUpdates) {
-        super(properties, registryRef, dimension, profiler, isClient, debugWorld, seed, maxChainedNeighborUpdates);
+        super(properties, registryRef, drm, dimension, profiler, isClient, debugWorld, seed, maxChainedNeighborUpdates);
     }
 
     @Inject(method = "tickTime", at = @At(

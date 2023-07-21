@@ -1,7 +1,7 @@
 # Toto's Carpet Tweaks
 
 ![GitHub](https://img.shields.io/github/license/totorewa/totos-carpet-tweaks?style=flat-square)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/totorewa/totos-carpet-tweaks/build?style=flat-square)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/totorewa/totos-carpet-tweaks/build.yml?style=flat-square)
 ![GitHub issues](https://img.shields.io/github/issues/totorewa/totos-carpet-tweaks?style=flat-square)
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/totorewa/totos-carpet-tweaks?display_name=tag&include_prereleases&style=flat-square)
 [![CurseForge versions](https://cf.way2muchnoise.eu/versions/633476.svg)](https://www.curseforge.com/minecraft/mc-mods/totos-carpet-tweaks)
